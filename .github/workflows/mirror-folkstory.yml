@@ -1,0 +1,36 @@
+name: mirror-folkstory
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    # UTC 17:30 -> CST (China) 1:30 see https://datetime360.com/cn/utc-cst-china-time/
+    - cron: '30 17 * * *'
+
+jobs:
+  run:
+    name: Sync GitHub repos to other hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate repo list
+        id: repo
+        uses: yi-Xu-0100/repo-list-generator@v1.1.1
+        with:
+          user: folkstory
+
+      - name: Mirror hub with cache and list
+        uses: Yikun/hub-mirror-action@v1.3
+        with:
+          src: github/folkstory
+          dst: gitee/folkstory
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: '${{ steps.repo.outputs.repoList }}'
+          black_list: 'foo,bar'
+          cache_path: /github/workspace/hub-mirror-cache
+          account_type: org
+          force_update: true
+
+      - name: Print cache path
+        run: |
+          ls -la ${{ github.workspace }}/hub-mirror-cache
