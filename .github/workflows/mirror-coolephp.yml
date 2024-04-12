@@ -19,7 +19,7 @@ jobs:
           user: coolephp
 
       - name: Mirror hub with cache and list
-        uses: Yikun/hub-mirror-action@v0.13
+        uses: Yikun/hub-mirror-action@v1.3
         with:
           src: github/coolephp
           dst: gitee/coolephp
