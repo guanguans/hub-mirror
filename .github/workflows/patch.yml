@@ -1,9 +1,4 @@
 name: patch
-# version: 1.0.1
-# author: [yiXu](https://github.com/yi-Xu-0100)
-# guide: [yi-Xu-0100/hub-mirror](https://github.com/yi-Xu-0100/hub-mirror)
-# template: [patch.yml](https://github.com/yi-Xu-0100/hub-mirror/blob/main/template/patch.yml)
-# lastmod: 2021-01-29 23:07:11
 
 on:
   workflow_dispatch:
