@@ -1,0 +1,37 @@
+name: hub-mirror
+
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    # UTC 17:30 -> CST (China) 1:30 see https://datetime360.com/cn/utc-cst-china-time/
+    - cron: '30 17 * * *'
+
+jobs:
+  run:
+    name: Sync GitHub repos to other hub
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Generate repo list
+        id: repo
+        uses: yi-Xu-0100/repo-list-generator@v1.0.0
+#        with:
+#          user: coolephp
+
+      - name: Mirror hub with cache and list
+        uses: Yikun/hub-mirror-action@v0.13
+        with:
+          src: github/guanguans
+          dst: gitee/guanguans
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          black_list: 'jetbrains-agent'
+          static_list: '${{ steps.repo.outputs.repoList }}'
+          cache_path: /github/workspace/hub-mirror-cache
+          account_type: user
+          force_update: true
+
+      - name: Print cache path
+        run: |
+          ls -la ${{ github.workspace }}/hub-mirror-cache
