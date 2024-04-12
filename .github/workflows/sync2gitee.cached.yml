@@ -20,7 +20,7 @@ jobs:
 
       - name: Get repo and time
         id: info
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           result-encoding: string
           script: |
