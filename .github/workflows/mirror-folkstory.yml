@@ -18,7 +18,7 @@ jobs:
           user: folkstory
 
       - name: Mirror hub with cache and list
-        uses: Yikun/hub-mirror-action@v1.4
+        uses: Yikun/hub-mirror-action@v1.5
         with:
           src: github/folkstory
           dst: gitee/folkstory
