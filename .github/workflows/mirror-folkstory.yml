@@ -33,11 +33,11 @@ jobs:
       - name: Print cache path
         run: |
           ls -la ${{ github.workspace }}/hub-mirror-cache
-  keepalive-schedule-job:
-    name: Keepalive schedule job
-    runs-on: ubuntu-latest
-    permissions:
-      actions: write
-    steps:
-      - uses: actions/checkout@v7
+#  keepalive-schedule-job:
+#    name: Keepalive schedule job
+#    runs-on: ubuntu-latest
+#    permissions:
+#      actions: write
+#    steps:
+#      - uses: actions/checkout@v7
 #      - uses: gautamkrishnar/keepalive-workflow@v2
