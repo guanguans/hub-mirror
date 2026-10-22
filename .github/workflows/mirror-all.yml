@@ -1,0 +1,21 @@
+name: mirror-all
+
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
+jobs:
+  mirror-coolephp:
+    uses: ./.github/workflows/mirror-coolephp.yml
+    secrets: inherit
+
+  mirror-folkstory:
+    uses: ./.github/workflows/mirror-folkstory.yml
+    secrets: inherit
+
+  mirror-guanguans:
+    uses: ./.github/workflows/mirror-guanguans.yml
+    secrets: inherit

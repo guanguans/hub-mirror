@@ -2,9 +2,15 @@ name: mirror-coolephp
 
 on:
   push:
+  workflow_call:
   workflow_dispatch:
   schedule: # UTC 17:30 -> CST (China) 1:30 see https://datetime360.com/cn/utc-cst-china-time/
     - cron: '30 17 * * *'
+
+concurrency:
+#  group: ${{ github.workflow }}
+  group: mirror-coolephp
+  cancel-in-progress: false
 
 jobs:
   run:
@@ -33,6 +39,7 @@ jobs:
       - name: Print cache path
         run: |
           ls -la ${{ github.workspace }}/hub-mirror-cache
+
 #  keepalive-schedule-job:
 #    name: Keepalive schedule job
 #    runs-on: ubuntu-latest
